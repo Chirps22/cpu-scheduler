@@ -1,9 +1,9 @@
 package task1;
 
+import java.io.File;  //I am allowed this right?
 import java.util.*;
 
 public class TaskOne {
-    //test
     // store all the output in this ArrayList for testing purposes
     private static final List<String> bufferOutput = new ArrayList<>();
     
@@ -28,8 +28,13 @@ public class TaskOne {
     }
     // To be completed
     public void executeCommands(String inputString) {
-    	if (inputString == "cat") {
-    		
+    	String[] subInput = inputString.split(" ");
+    	if (subInput[0] == "cat") {
+    		if (new File(subInput[1]).isFile()) {
+    			
+    		} else {
+    			throw new IllegalArgumentException("Error: Invalid file" + subInput[1]);
+    		}
     	}
 
     }
