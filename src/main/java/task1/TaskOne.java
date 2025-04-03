@@ -28,6 +28,9 @@ public class TaskOne {
     }
     // To be completed
     public void executeCommands(String inputString) {
+    	if (inputString == "cat") {
+    		
+    	}
 
     }
 
