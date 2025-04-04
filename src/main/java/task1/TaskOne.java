@@ -1,8 +1,9 @@
 package task1;
 
-import java.io.BufferedReader; //I am allowed this right?
-import java.io.File;  //I am allowed this right?
-import java.io.FileReader; //I am allowed this right?
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class TaskOne {
@@ -32,21 +33,15 @@ public class TaskOne {
     public void executeCommands(String inputString) {
     	String[] subInput = inputString.split(" ");
     	if (subInput[0] == "cat") {
-    		if (new File(subInput[1]).isFile()) {
-    			BufferedReader buffer = new BufferedReader(new FileReader(subInput[1]));
-    			String output = "";
-    			String line = null;
-    			while ((line = buffer.readLine()) != null) {
-    				output += line;
-    			}
-    		} else {
-    			throw new IllegalArgumentException("Error: Invalid file" + subInput[1]);   //do I need file name as well?
-    		}
-    	}
-
+    		cat(subInput[1]);
+    	} 
     }
 
     // more methods can be added 
+    
+    public void cat(String catInput){
+    	
+    }
 
     
     public List<String> getCommandOutput() {
