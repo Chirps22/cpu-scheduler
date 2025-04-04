@@ -1,7 +1,7 @@
 package task1;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
@@ -40,6 +40,18 @@ public class TaskOne {
     // more methods can be added 
     
     public void cat(String catInput){
+    	if (new File(catInput).exists()) {
+    		try (BufferedReader reader = new BufferedReader(new FileReader(catInput))) {
+    			String line;
+    			while ((line = reader.readLine()) != null) {
+    				//
+    			}
+    		} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	} else {
+    		throw new IllegalArgumentException("Error: Invalid file " + catInput);  //do I need file name as well?
+    	}
     	
     }
 
