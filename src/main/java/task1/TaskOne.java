@@ -1,6 +1,8 @@
 package task1;
 
+import java.io.BufferedReader; //I am allowed this right?
 import java.io.File;  //I am allowed this right?
+import java.io.FileReader; //I am allowed this right?
 import java.util.*;
 
 public class TaskOne {
@@ -31,9 +33,14 @@ public class TaskOne {
     	String[] subInput = inputString.split(" ");
     	if (subInput[0] == "cat") {
     		if (new File(subInput[1]).isFile()) {
-    			
+    			BufferedReader buffer = new BufferedReader(new FileReader(subInput[1]));
+    			String output = "";
+    			String line = null;
+    			while ((line = buffer.readLine()) != null) {
+    				output += line;
+    			}
     		} else {
-    			throw new IllegalArgumentException("Error: Invalid file" + subInput[1]);
+    			throw new IllegalArgumentException("Error: Invalid file" + subInput[1]);   //do I need file name as well?
     		}
     	}
 
