@@ -44,7 +44,7 @@ public class TaskOne {
     		try (BufferedReader reader = new BufferedReader(new FileReader(catInput))) {
     			String line;
     			while ((line = reader.readLine()) != null) {
-    				//
+    				bufferOutput.set(0, line);
     			}
     		} catch (IOException e) {
 				e.printStackTrace();
