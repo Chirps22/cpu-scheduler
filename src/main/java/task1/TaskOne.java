@@ -32,19 +32,26 @@ public class TaskOne {
     // To be completed
     public void executeCommands(String inputString) {
     	String[] subInput = inputString.split(" ");
-    	if (subInput[0] == "cat") {
+    	switch(subInput[0]) {
+    	case "cat":
     		cat(subInput[1]);
-    	} 
+    	case "wc":
+    		if (subInput[1] == "-l") {
+    			//pass
+    		} else {
+    			wc(subInput[1]);
+    		}
+    	}
     }
 
     // more methods can be added 
     
-    public void cat(String catInput){
+    public void cat(String catInput) {
     	if (new File(catInput).exists()) {
     		try (BufferedReader reader = new BufferedReader(new FileReader(catInput))) {
     			String line;
     			while ((line = reader.readLine()) != null) {
-    				bufferOutput.set(0, line);
+    				bufferOutput.add(line);
     			}
     		} catch (IOException e) {
 				e.printStackTrace();
@@ -52,6 +59,10 @@ public class TaskOne {
     	} else {
     		throw new IllegalArgumentException("Error: Invalid file " + catInput);  //do I need file name as well?
     	}
+    	
+    }
+    
+    public void wc(String wcInput) {
     	
     }
 
