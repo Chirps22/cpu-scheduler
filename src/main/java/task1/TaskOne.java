@@ -37,10 +37,12 @@ public class TaskOne {
     		cat(subInput[1]);
     	case "wc":
     		if (subInput[1] == "-l") {
-    			//pass
+    			lWc(subInput[1]);
     		} else {
     			wc(subInput[1]);
     		}
+    	case "sort":
+    		sort(subInput[1]);
     	}
     }
 
@@ -52,6 +54,7 @@ public class TaskOne {
     			String line;
     			while ((line = reader.readLine()) != null) {
     				bufferOutput.add(line);
+    			reader.close();
     			}
     		} catch (IOException e) {
 				e.printStackTrace();
@@ -63,6 +66,14 @@ public class TaskOne {
     }
     
     public void wc(String wcInput) {
+    	
+    }
+    
+    public void lWc(String lwcInput) {
+    	
+    }
+    
+    public void sort(String sortInput) {
     	
     }
 
