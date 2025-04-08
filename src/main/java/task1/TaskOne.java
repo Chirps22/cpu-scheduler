@@ -126,7 +126,10 @@ public class TaskOne {
     			}
     			reader.close();
     			//can I use a prebuilt library to sort???
-    			bufferOutput.add(null);
+    			Collections.sort(sortFileLines);
+    			for (String i : sortFileLines) {
+    				bufferOutput.add(i);
+    			}
     		} catch (IOException e) {
 				e.printStackTrace();
 			}
