@@ -37,19 +37,20 @@ public class TaskOne {
     		cat(subInput[1]);
     		break;
     	case "wc":
-    		if (subInput[1] == "-l") {
+    		if (subInput[1].equals("-l")) {
     			lWc(subInput[2]);
+    			break;
     		} else {
     			wc(subInput[1]);
+    			break;
     		}
-    		break;
     	case "sort":
     		sort(subInput[1]);
     		break;
     	case "uniq":
     		uniq(subInput[1]);
     	default:
-    		//actual error or just print message?
+    		throw new IllegalArgumentException("Invalid command " + subInput[0]);
     	}
     }
 
@@ -97,7 +98,7 @@ public class TaskOne {
     	}
     }
     
-    public void lWc(String lwcInput) {    //does not work!!!!!
+    public void lWc(String lwcInput) {
     	if (new File(lwcInput).exists()) {
     		try (BufferedReader reader = new BufferedReader(new FileReader(lwcInput))) {
     			String line;
@@ -148,11 +149,14 @@ public class TaskOne {
     			}
     			reader.close();
     			for (int i = 0; i < (uniqFileLines.size() - 1); i++) {
-    				if (uniqFileLines.get(i) == uniqFileLines.get(i+1)) {
-    					uniqFileLines.remove(i);
+    				while (uniqFileLines.get(i).equals(uniqFileLines.get(i+1))) {
+    					uniqFileLines.remove(i+1);
     				}
     			}
     			//how to get this outputted when working in pipe? Temp file???
+    			for (String i : uniqFileLines) {
+    				bufferOutput.add(i);
+    			}
     		} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -160,7 +164,6 @@ public class TaskOne {
     		throw new IllegalArgumentException("Invalid file " + uniqInput);
     	}
     }
-
     
     public List<String> getCommandOutput() {
         return new ArrayList<>(bufferOutput);
