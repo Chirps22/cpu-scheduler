@@ -29,7 +29,7 @@ public class TaskOne {
             }
         }
     }
-    // To be completed
+
     public void executeCommands(String inputString) {
     	String[] subInput = inputString.split(" ");
     	switch(subInput[0]) {
@@ -49,15 +49,16 @@ public class TaskOne {
     		break;
     	case "uniq":
     		uniq(subInput[1]);
+    		break;
+    	case "":
+    		break;
     	default:
     		throw new IllegalArgumentException("Invalid command " + subInput[0]);
     	}
     }
-
-    // more methods can be added 
     
     public void cat(String catInput) {
-    	if (new File(catInput).exists()) {
+    	if (new File(catInput).exists() && new File(catInput).isFile()) {
     		try (BufferedReader reader = new BufferedReader(new FileReader(catInput))) {
     			String line;
     			while ((line = reader.readLine()) != null) {
@@ -67,6 +68,8 @@ public class TaskOne {
     		} catch (IOException e) {
 				e.printStackTrace();
 			}
+    	} else if (new File(catInput).exists() && new File(catInput).isDirectory()) {
+    		throw new IllegalArgumentException(catInput + "is a directory");
     	} else {
     		throw new IllegalArgumentException("Invalid file " + catInput);
     	}
@@ -126,7 +129,6 @@ public class TaskOne {
     				sortFileLines.add(line);
     			}
     			reader.close();
-    			//can I use a prebuilt library to sort???
     			Collections.sort(sortFileLines);
     			for (String i : sortFileLines) {
     				bufferOutput.add(i);
@@ -134,12 +136,14 @@ public class TaskOne {
     		} catch (IOException e) {
 				e.printStackTrace();
 			}
+    	} else if (new File(sortInput).length() == 0){
+    		throw new IllegalArgumentException("Cannot sort empty file " + sortInput);    //do I need this???
     	} else {
     		throw new IllegalArgumentException("Invalid file " + sortInput);
     	}
     }
     
-    public void uniq(String uniqInput) {  //what if there are 3 duplicates? if one compared to 2 gets rid of 2 and 3 takes its place, do i compare 1 to 3 or move on and compare 3 to 4?
+    public void uniq(String uniqInput) {
     	if (new File(uniqInput).exists()) {
     		try (BufferedReader reader = new BufferedReader(new FileReader(uniqInput))) {
     			String line;
@@ -153,7 +157,6 @@ public class TaskOne {
     					uniqFileLines.remove(i+1);
     				}
     			}
-    			//how to get this outputted when working in pipe? Temp file???
     			for (String i : uniqFileLines) {
     				bufferOutput.add(i);
     			}
@@ -163,6 +166,10 @@ public class TaskOne {
     	} else {
     		throw new IllegalArgumentException("Invalid file " + uniqInput);
     	}
+    }
+    
+    public void pipe() {
+    	
     }
     
     public List<String> getCommandOutput() {
