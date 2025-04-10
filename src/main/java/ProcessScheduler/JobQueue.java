@@ -1,5 +1,6 @@
 package ProcessScheduler;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -28,7 +29,7 @@ public class JobQueue {
 	 * @throws FileNotFoundException
 	 */
 	public void readFile(String filePath) throws FileNotFoundException {
-		File file = null;
+		File file = new File(filePath);
 		// TODO
 		// Read the file...
 		// Check if the file exists
@@ -37,7 +38,25 @@ public class JobQueue {
 	   /*  if (!file.exists()) {
 	        throw new FileNotFoundException("The file at path " + filePath + " does not exist.");
 	    }*/
-
+		if (file.exists()) {
+			try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+				String line;
+				while ((line = reader.readLine()) != null) {
+					if (line.startsWith("#")) {	
+						continue;
+					} else {
+						String[] splitScript = line.split(",");
+						int priority = Integer.parseInt(splitScript[1]);
+						addToQueue(splitScript[0],priority,splitScript[2]);
+					}
+				}
+				reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			throw new FileNotFoundException("The file at path " + filePath + " does not exist.");
+		}
 	}
 
 	/** Creates a PCB object and adds it to the jobQueue. 
@@ -48,6 +67,9 @@ public class JobQueue {
 	public void addToQueue(String PID, int priority, String processPathFile) {
 		// get the process CPU burst's time, then add to the queue
 		// TODO
+		long burst = generateBurst(processPathFile);
+		ProcessControlBlock process = new ProcessControlBlock(PID,priority,burst,processPathFile);
+		queue.add(process);
 	}
 
 	/** 

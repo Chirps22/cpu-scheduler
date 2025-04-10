@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.Queue;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class schedulerTest {
