@@ -47,8 +47,6 @@ public class TaskOne {
             } else {
                 fileInput = "temp.txt";
             }
-
-            // Now run the appropriate command
             if (cmd.equals("cat")) {
                 cat(fileInput);
             } else if (cmd.equals("sort")) {
@@ -56,29 +54,25 @@ public class TaskOne {
             } else if (cmd.equals("uniq")) {
                 uniq(fileInput);
             } else if (cmd.equals("wc")) {
-                // Check if user typed "wc -l"
                 if (arg != null && arg.equals("-l")) {
-                    // If the command was "wc -l", get the filename if it exists
                     String nextArg = null;
                     if (subCommands.length > 2) {
                         nextArg = subCommands[2];
                     }
 
                     if (i == 0) {
-                        lWc(nextArg); // First command, use given filename
+                        lWc(nextArg);
                     } else {
-                        lWc("temp.txt"); // Later command, use result of previous
+                        lWc("temp.txt");
                     }
                 } else {
                     wc(fileInput);
                 }
             } else {
-                // Command not recognized
-                throw new IllegalArgumentException("Unknown command: " + cmd);
+                if (!cmd.trim().isEmpty()) {
+                	throw new IllegalArgumentException("Invalid command " + cmd);
+                }
             }
-
-            // After executing this command, if it's NOT the last command,
-            // save the result (in bufferOutput) to "temp.txt" for the next command to use
             if (i < commands.length - 1) {
                 try {
                 	FileWriter writer = new FileWriter(tempFile);
@@ -87,78 +81,12 @@ public class TaskOne {
                 		writer.write(line + "\n");
                 	}
                 	writer.close();
-
-                	// Clear bufferOutput for the next command
                 	bufferOutput.clear();
                 } catch (IOException e) {
 					e.printStackTrace();
                 }
             }
         }
-    	
-    	
-    	
-    	
-    	
-    	
-    	/*String[] subInput = inputString.split(" ");
-    	File temp = new File("temp.txt");
-    	if (inputString.contains("|")) {
-    		List<String> pipeCommands = new ArrayList<>();
-    		pipeCommands.add(subInput[1]);
-    		pipeCommands.add(subInput[0]);
-    		String[] splitCommands = inputString.split("\\|");
-    		for (int i = 1; i < splitCommands.length; i++) {
-    			pipeCommands.add(splitCommands[i].trim());
-    		}
-    		for (int i = 1; i < pipeCommands.size(); i++) {
-    			switch(pipeCommands.get(i)) {
-    	    	case "cat":
-    	    		cat(pipeCommands.get(0));
-    	    		break;
-    	    	case "wc":
-    	    		wc(pipeCommands.get(0));
-    	    		break;
-    	    	case "wc -l":
-    	    		lWc(pipeCommands.get(0));
-    	    		break;
-    	    	case "sort":
-    	    		sort(pipeCommands.get(0));
-    	    		break;
-    	    	case "uniq":
-    	    		uniq(pipeCommands.get(0));
-    	    		break;
-    	    	case "":
-    	    		break;
-    	    	default:
-    	    		throw new IllegalArgumentException("Invalid command " + pipeCommands.get(i));
-    	    	}
-    		}
-    	} else {
-	    	switch(subInput[0]) {
-	    	case "cat":
-	    		cat(subInput[1]);
-	    		break;
-	    	case "wc":
-	    		if (subInput[1].equals("-l")) {
-	    			lWc(subInput[2]);
-	    			break;
-	    		} else {
-	    			wc(subInput[1]);
-	    			break;
-	    		}
-	    	case "sort":
-	    		sort(subInput[1]);
-	    		break;
-	    	case "uniq":
-	    		uniq(subInput[1]);
-	    		break;
-	    	case "":
-	    		break;
-	    	default:
-	    		throw new IllegalArgumentException("Invalid command " + subInput[0]);
-	    	}
-    	}  */
     }
     
     public void cat(String catInput) {
@@ -224,6 +152,10 @@ public class TaskOne {
     }
     
     public void sort(String sortInput) {
+    	if (new File(sortInput).length() == 0 && !new File(sortInput).exists()) {
+    	} else if (new File(sortInput).length() == 0) {
+    		 System.out.println("File is empty");
+    	}
     	if (new File(sortInput).exists()) {
     		try (BufferedReader reader = new BufferedReader(new FileReader(sortInput))) {
     			String line;
@@ -239,14 +171,16 @@ public class TaskOne {
     		} catch (IOException e) {
 				e.printStackTrace();
 			}
-    	} else if (new File(sortInput).length() == 0){
-    		throw new IllegalArgumentException("Cannot sort empty file " + sortInput);    //do I need this???
     	} else {
     		throw new IllegalArgumentException("Invalid file " + sortInput);
     	}
     }
     
     public void uniq(String uniqInput) {
+    	if (new File(uniqInput).length() == 0 && !new File(uniqInput).exists()) {
+    	} else if (new File(uniqInput).length() == 0) {
+    		 System.out.println("File is empty");
+    	}
     	if (new File(uniqInput).exists()) {
     		try (BufferedReader reader = new BufferedReader(new FileReader(uniqInput))) {
     			String line;
