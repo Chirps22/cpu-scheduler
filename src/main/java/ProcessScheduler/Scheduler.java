@@ -65,7 +65,7 @@ public class Scheduler {
 		for (ProcessControlBlock i: readyQueue) {
 			System.out.println(i.printProcessControlBlock());
 		}
-		PriorityQueue<ProcessControlBlock> priorityQueue = new PriorityQueue<>(Comparator.comparingInt(ProcessControlBlock::getPriority));
+		PriorityQueue<ProcessControlBlock> priorityQueue = new PriorityQueue<>(Comparator.comparingInt(ProcessControlBlock::getPriority).reversed());
 		priorityQueue.addAll(readyQueue);
         while (!priorityQueue.isEmpty()) {
         	ProcessControlBlock pcb = priorityQueue.poll();
