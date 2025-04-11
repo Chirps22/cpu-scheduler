@@ -26,7 +26,7 @@ public class ProcessCreator implements Runnable {
 	 */
 	public void run() {
 		// TODO
-		synchronized (jobQueue) {
+		synchronized (readyQueue) {
 			while (!jobQueue.getQueue().isEmpty()) {
 				ProcessControlBlock PCB = jobQueue.getQueue().poll();
 				PCB.setState("ready");

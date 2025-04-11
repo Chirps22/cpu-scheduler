@@ -143,9 +143,9 @@ public class ProcessControlBlock {
 	 * then you can calcuate the execution time of PCB.
 	 * this method is called when PCB execution is finished.
 	 */
-	public void setExecutionTime(long arrivalTime) {
+	public void setExecutionTime() {
 	    // TODO
-		this.executionTime = System.currentTimeMillis() - arrivalTime;
+		this.executionTime = System.currentTimeMillis() - getArrivalTime();
 	}
 
 }

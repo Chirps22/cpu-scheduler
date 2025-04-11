@@ -37,9 +37,8 @@ public class Main {
 	public static void finaliseThreads() {
 		try {
 			processCreator.join();
-			dispatcher.join();
+			dispatcher.join();            //can I edit this to get the required output?
 			Thread.sleep(100);
-
 			System.out.println("Completion order:");
 			ArrayList<String> processes = log.getCompletionLog();
 			for (String process : processes) {
@@ -84,7 +83,7 @@ public class Main {
 	public static double getBurstSpeed() {
 		long burstTimeMS = 0;
 		int loops = 20;
-		String scriptPath = "process1.py";
+		String scriptPath = "process1.py";    //does this need to be changed?
 		double sizeInBytes = 0.0;
 		Path path = Paths.get(scriptPath);
 

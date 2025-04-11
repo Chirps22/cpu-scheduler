@@ -1,6 +1,7 @@
 package ProcessScheduler;
 
 import java.util.Comparator;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class Scheduler {
@@ -61,6 +62,16 @@ public class Scheduler {
 	
 	public void priorityScheduling() {
 		// TODO
+		for (ProcessControlBlock i: readyQueue) {
+			System.out.println(i.printProcessControlBlock());
+		}
+		PriorityQueue<ProcessControlBlock> priorityQueue = new PriorityQueue<>(Comparator.comparingInt(ProcessControlBlock::getPriority));
+		priorityQueue.addAll(readyQueue);
+        while (!priorityQueue.isEmpty()) {
+        	ProcessControlBlock pcb = priorityQueue.poll();
+            CPU cpu = new CPU(pcb, log);
+            cpu.run();
+        }
 	}
 
 	/**
@@ -68,6 +79,14 @@ public class Scheduler {
 	 */
 	public void FCFS() {
 		// TODO
+		for (ProcessControlBlock i: readyQueue) {
+			System.out.println(i.printProcessControlBlock());
+		}
+		while (!readyQueue.isEmpty()) {
+			ProcessControlBlock pcb = readyQueue.poll();
+			CPU cpu = new CPU(pcb, log);
+			cpu.run();
+        }
 	}
 
 	/**
@@ -75,6 +94,26 @@ public class Scheduler {
 	 */
 	public void RR() {
 		// TODO
-
+		for (ProcessControlBlock i: readyQueue) {
+			System.out.println(i.printProcessControlBlock());
+		}
+		while (!readyQueue.isEmpty()) {
+	        ProcessControlBlock pcb = readyQueue.poll();
+	        if (pcb.getCPUBurstTime() > timeQuantum) {
+	        	System.out.println(pcb.getPID() + ": Running");
+	            try {
+	            	Thread.sleep(timeQuantum);
+	            } catch (InterruptedException e) {
+	            	e.printStackTrace();
+	            }
+	            pcb.setCPUBurstTime(pcb.getCPUBurstTime() - timeQuantum);
+	            pcb.addContextSwitch();
+	            System.out.println(pcb.getPID() + ": Quantum exceeded");
+	            readyQueue.add(pcb);
+	        } else {
+	        	CPU cpu = new CPU(pcb, log);
+		        cpu.run();
+	        }
+	    }
 	}
 }

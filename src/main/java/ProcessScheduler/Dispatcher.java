@@ -30,15 +30,11 @@ public class Dispatcher implements Runnable {
 	public void run() {
 		// TODO
 		synchronized (readyQueue) {
-            while (!readyQueue.isEmpty()) {
-                PCB = readyQueue.poll();
-                if (PCB != null) {
-                    scheduler.runAlgorithm();
-                }
+            if (!readyQueue.isEmpty()) {
+                scheduler.runAlgorithm();
             }
         }
 	}
-
 
 	public ProcessControlBlock getPCB() {
 		return this.PCB;
