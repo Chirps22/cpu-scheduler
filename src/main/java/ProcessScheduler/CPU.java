@@ -26,16 +26,8 @@ public class CPU extends Thread {
 
 	/**
 	 * Run method - Runs a python process when called.
-	 * use ProcessBuilder to run a Python process
-	 * You should put the current CPU thread to sleep for the time the python script
+	 * Puts the current CPU thread to sleep for the time the python script
 	 * should run for.
-	 * and wait until python script is completed (use waitFor())
-	 * store the output of Python script in PCB
-	 * record the total execution time
-	 * set the state to be 'terminated'
-	 * record the number of context switches
-	 * Save the PCB output in the EventLog (e.g., P01: Complete, Context Switches:
-	 * 0, Output: Sum is 9)
 	 * 
 	 */
 	public void run() {
