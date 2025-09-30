@@ -1,8 +1,8 @@
-# COM1032 Coursework Assignment
+A Java implementation of a CPU scheduling simulator that supports multiple scheduling algorithms:
+1. First-Come, First-Served (FCFS)
+2. Round Robin (RR)
+3. Priority Scheduling
 
-The badge below indicates if your submission compiled correctly. It may take some time to update. You can click the badge to see the jobs page and failure traces.
-
-You must ensure your project compiles correctly.
-
-[![Pipeline status](https://gitlab.surrey.ac.uk/csee/com1032/2024-25/com1032bf00344/badges/main/pipeline.svg)](https://gitlab.surrey.ac.uk/csee/com1032/2024-25/com1032bf00344/-/jobs/)
-
+Features:
+Simulates process execution using different algorithms.
+Logs process execution order and waiting times.
