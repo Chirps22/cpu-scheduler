@@ -37,7 +37,7 @@ public class Main {
 	public static void finaliseThreads() {
 		try {
 			processCreator.join();
-			dispatcher.join();            //can I edit this to get the required output?
+			dispatcher.join();        
 			Thread.sleep(100);
 			System.out.println("Completion order:");
 			ArrayList<String> processes = log.getCompletionLog();
@@ -71,11 +71,6 @@ public class Main {
 	}
 
 	/**
-	 * Calculate how much time (in milliseconds) the system takes to process a
-	 * single byte of the script.
-	 * You should modify the path of Python to suit your machine.
-	 * Change back to the orginal path for marking purpose.
-	 * 
 	 * @return burstSpeed per byte
 	 * @throws IOException
 	 * @throws InterruptedException
@@ -83,17 +78,12 @@ public class Main {
 	public static double getBurstSpeed() {
 		long burstTimeMS = 0;
 		int loops = 20;
-		String scriptPath = "process1.py";    //does this need to be changed?
+		String scriptPath = "process1.py";
 		double sizeInBytes = 0.0;
 		Path path = Paths.get(scriptPath);
 
 		try {
 			sizeInBytes = Files.size(path);
-            // type 'where python' in Windows in the command prompt to get the path. 
-			// The path should have double backslashes (\\) in it,
-			// (e.g. C:\\Users\\YourUsername\\AppData\\Local\\Programs\\Python\\Python39\\python.exe)
-            // Type 'which python3' in Linux (lab machines) to find the path 
-            // ** Change it to the origin path for the marking **
 			for (int i = 0; i < loops; i++) {
 				ProcessBuilder pb = new ProcessBuilder("/usr/bin/python3", scriptPath);
 				long startTime = System.nanoTime();
