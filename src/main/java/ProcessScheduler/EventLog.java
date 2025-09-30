@@ -5,7 +5,6 @@ import java.util.ArrayList;
 /**
  * Defines a Log object that stores an array of PCB objects 
  * as they were created and an array containing the processor output.
- * You are not required to modify this class for the coursework
  */
 public class EventLog {
 	/**
