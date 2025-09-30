@@ -58,7 +58,6 @@ public class ProcessControlBlock {
 	}
 	/*
 	 * print the details of the PCB
-	 * do not change the format of the printout for consistency of marking
 	 */
 	public String printProcessControlBlock() {
 		return ("(PID: " + getPID() + ", State: " + getState() + ", Priority: " + getPriority()
@@ -136,15 +135,9 @@ public class ProcessControlBlock {
 
 
 	/**
-	 * Sets the total execution time of a process in milliseconds.
-	 * the arrival time of the PCB should have been recorded.
-	 * Get the current time, 
-	 * (you may have to convert nanoseconds to milliseconds)
-	 * then you can calcuate the execution time of PCB.
-	 * this method is called when PCB execution is finished.
+	 * Calculates the execution time of PCB.
 	 */
 	public void setExecutionTime() {
-	    // TODO
 		this.executionTime = System.currentTimeMillis() - getArrivalTime();
 	}
 
