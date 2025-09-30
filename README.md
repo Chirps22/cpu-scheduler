@@ -1,3 +1,4 @@
+## CPU-Scheduler
 A Java implementation of a CPU scheduling simulator that supports multiple scheduling algorithms:
 1. First-Come, First-Served (FCFS)
 2. Round Robin (RR)
