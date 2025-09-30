@@ -23,10 +23,7 @@ public class Dispatcher implements Runnable {
 		this.readyQueue = readyQueue;
 		this.scheduler = scheduler;
 	}
-	/* run method checks if readyQueue is not empty, 
-	* then get the schedular to run the required algorithm
-	* you should ensure the ready queue cannot be modified while a PCB object is being dispatched.
-	*/
+
 	public void run() {
 		// TODO
 		synchronized (readyQueue) {
