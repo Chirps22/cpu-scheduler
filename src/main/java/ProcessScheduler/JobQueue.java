@@ -73,10 +73,6 @@ public class JobQueue {
 	}
 
 	/** 
-	 * Estimating CPU burst time for a Python script without running it is challenging 
-	 * To simplify this, we calculate the burst time of the process from size of the python file.
-	 * The estimated value can be slightly different each time.
-	 * This method should not be modified for consistency of marking.
 	 * @param PythonPathFile - path of python script
 	 * @return - generated burst time
 	 */
