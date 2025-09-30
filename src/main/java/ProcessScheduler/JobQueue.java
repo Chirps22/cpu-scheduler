@@ -30,14 +30,10 @@ public class JobQueue {
 	 */
 	public void readFile(String filePath) throws FileNotFoundException {
 		File file = new File(filePath);
-		// TODO
-		// Read the file...
+		// Read the file
 		// Check if the file exists
 		// Reads the InputScript file
 		// adds the process from the file to the queue (use addToQueue())
-	   /*  if (!file.exists()) {
-	        throw new FileNotFoundException("The file at path " + filePath + " does not exist.");
-	    }*/
 		if (file.exists()) {
 			try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 				String line;
